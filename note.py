@@ -5,23 +5,14 @@ import time
 class Note(object):
     """ Note class """
 
-    def __init__(self, content, group=1, modified=time.time(), nid=-1):
+    def __init__(self, content, group='General', modified=time.time(), nid=-1):
         self.content = content
         self.group = group
         self.modified = modified
         self.nid = nid
-
-    def get_content(self):
-        return self.content
-
-    def update_content(self, content):
-        self.content = content
-
-    def get_group(self):
-        return self.group
-
-    def update_group(self, group):
-        self.group = group
   
-    def update_edited(self, time):
-        self.edited = time
+    def update_modified(self, time):
+        self.edited = time.time()
+
+    def __repr__(self):
+        return str(self.nid) + ' | ' + self.content + ' | ' + str(self.group)

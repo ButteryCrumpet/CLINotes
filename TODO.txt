@@ -1,0 +1,10 @@
+Error checks for like everything
+Allow multiple groups??
+
+!!Shift CRUD behaviour onto the note class itself
+so note.delete note.update note.create/save etc
+
+do group class
+
+getopt.getopt
+click.pocoo.org

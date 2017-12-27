@@ -1,4 +1,6 @@
 import notes
 n = notes.NotesRun()
-n.create_note('this is a quick note')
-n.get_note(1)
+#n.create_group('Projects')
+#n.create_note('this is a project note', 'Projects')
+n.get_note(3)
+n.show_groups()
