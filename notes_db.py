@@ -1,10 +1,13 @@
 """ Note db connection class """
 
 import sqlite3
+import os 
 
 class NotesDB(object):
 
-    def __init__(self, db_path='notes.db'):
+    def __init__(self, db_path='default'):
+        if db_path == 'default':
+            db_path = self.get_default_path()
         self.conn = sqlite3.connect(db_path)
         self.cursor = self.conn.cursor()
         self.initTables()
@@ -20,6 +23,11 @@ class NotesDB(object):
         data = (note.content, note.modified, group_pid)
         self.cursor.execute(sql, data)
         self.conn.commit()
+
+    def get_all_notes(self):
+        sql = ('SELECT * FROM notes')
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
 
     def get_note(self, note_id):
         sql = ('SELECT notes.content, groups.name, notes.modified, notes.pid '
@@ -68,3 +76,14 @@ class NotesDB(object):
                'name TEXT NOT NULL UNIQUE'
                ')') 
         self.cursor.execute(sql)
+
+    def get_default_path(self):
+        currdir = os.path.dirname(os.path.realpath(__file__))
+        return os.path.join(currdir, 'notes.db')
+
+def main():
+    currdir = os.path.dirname(os.path.realpath(__file__))
+    print(os.path.join(currdir, 'notes.db'))
+
+if __name__ == '__main__':
+    main()
